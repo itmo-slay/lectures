@@ -1,1 +1,3 @@
-# linear algebra
+# linear-algebra
+
+**Конспекты по предмету "Линейная алгебра"**
