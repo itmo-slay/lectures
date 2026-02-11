@@ -11,7 +11,6 @@
 
 #let exprtb(func, x, top, bottom) = $display(#func^(#top)_(#bottom) #x)$
 
-// TODO: update the thingy with this block
 #let titleless_block(body) = [
   #rect(
     radius: 5pt,
@@ -59,7 +58,9 @@
 
 До марта изучаем линейные пространства и дифференциальные уравнения
 
-#linebreakn(3)
+#linebreakn(1)
+
+#topicbreak(0)
 
 = Лекция 01. 04-02-2026. 2-й семестр
 

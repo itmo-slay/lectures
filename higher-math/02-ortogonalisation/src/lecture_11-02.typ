@@ -103,7 +103,7 @@
 
 #title_block(
   [Определение:],
-  [$a_1, a_2, a_3, dots, a_n$ называется ортонормированной, если $dabs(a_j)$],
+  [$a_1, a_2, a_3, dots, a_n$ называется ортонормированной, если $dabs(a_j) = 1$ и $(a_i, a_j) = 0, quad forall i eq.not j$],
 )\
 
 #theorem_block(
@@ -116,12 +116,12 @@
 
     $a_1, a_2, dots, a_k$ - ортогональная система\
     $y = lambda_1 a_1 + lambda_2 a_2 + dots + lambda_k a_k = 0$\
-    Найдем $(y, a_i) = (lambda_1 a_1 + lambda_2 a_2 + dots + lambda_k a_k a_j) = lambda_1 (a_1, a_i) + lambda_2 (a_2, a_i) + dots + lambda_ i ( a_i, a_j) + dots + lambda_k (a_k, a_i) =$\
+    Найдем $(y, a_i) = (lambda_1 a_1 + lambda_2 a_2 + dots + lambda_k a_k, a_i) = lambda_1 (a_1, a_i) + lambda_2 (a_2, a_i) + dots + lambda_ i ( a_i, a_j) + dots + lambda_k (a_k, a_i) =$\
 
     $= display(mat((a_i, a_j) = 0; i eq.not j)) =lambda_i (a_i, a_i)$\
 
     $(y, a_i) = (overline(0), a_i) = 0$\
-    $lambda_i (a_i, a_i) = 0$, так как $(a_i, a_i) eq.not$, то $lambda_i = 0$
+    $lambda_i (a_i, a_i) = 0$, так как $(a_i, a_i) eq.not$, то $lambda_i = 0$\
     Аналогично можно проверить все $a_j, j = overline("1, k")$ и показать, что $forall lambda_i = 0, i = overline("1, k")$, то есть $(a_1, a_2, dots, a_k)$ - линейно независима, чтд
   ]
 )\
@@ -129,7 +129,7 @@
 
 #theorem_block(
   [
-    Теорема Пифагора (обобщеная)\
+    Теорема Пифагора (обобщенная)\
   ],
   [
     Для любой ортогональной системы $a_1, a_2, dots, a_k quad display(dabs(sumtb(a_i, k, i=1))^2) = display(sumtb(dabs(a_i)^2, k, i=1))$
@@ -141,7 +141,7 @@
 
     #set math.mat(delim: "|")
 
-    $(a_1, a_1) + (a_1, a_2) + dots +(a_1, a_k) + (a_2, a_1) + (a_2, a_2) + dots + (a_k, a_k) = display(mat((a_i, a_j) = 0; i eq.not 0; "при i = j"; (a_i, a_i) = dabs(a_i)^2))=$\
+    $(a_1, a_1) + (a_1, a_2) + dots +(a_1, a_k) + (a_2, a_1) + (a_2, a_2) + dots + (a_k, a_k) = display(mat((a_i, a_j) = 0; i eq.not j; "при i = j"; (a_i, a_i) = dabs(a_i)^2))=$\
     $= dabs(a_1)^2 + dabs(a_2)^2 + dots + dabs(a_k)^2 = display(sumtb(dabs(a_i)^2, k, i=1))$\
 
     чтд
@@ -184,7 +184,7 @@ $ display(G_S=mat(
   ],
   [
     *Доказательство:*\
-    $sumtb(sumtb(x_i y_j g_(i j), n, j=1), n, i=1) = (x_1, x_2, dots, x_n) mat(g_11, g_12, dots, g_(1 n); g_21, g_22, dots, g_(2 n); dots.v; g_(n 1), g_(n 2), dots, g_(n n))$\
+    $sumtb(sumtb(x_i y_j g_(i j), n, j=1), n, i=1) = (x_1, x_2, dots, x_n) mat(g_11, g_12, dots, g_(1 n); g_21, g_22, dots, g_(2 n); dots.v; g_(n 1), g_(n 2), dots, g_(n n)) mat(y_1; y_2; dots.v; y_n)$\
     Доказать самостоятельно (свое доказательство закину позже)
   ],
 )
@@ -220,17 +220,26 @@ $ display(G_S=mat(
   [
     *Доказательство*\
     Пусть $S = (a_1, a_2, dots, a_k)$ - линейно независимая система векторов евклидового пространства $cal(E)^n$\
-
-    *сюда вставить график с доски*\
+    #image("images\image-2.png", width: 40%)
     Построим систему ортогональных векторов к системе $S$\
     $S_1 = (e_1, e_2, dots, e_k)$\
     1. $e_1 = a_1$\
-    2. $e_2 = a_2 - alpha_2 e+1, quad (e_1, e_2) = 0$\
-    $(a_2 + alpha_21 e_1, e_1) = 0, quad (a_2, e_1) + alpha_21 (e_1, e_1) = 0, wide alpha_21 = display(-((a_2,e_1))/((e_1,e_1)) = - ((a_2, e_1))/(dabs(e_1)^2))$\
-    *сюда еще один график с доски*\
+    
 
-    $e_3 = a_3 + alpha_32 e_2 + alpha_31 e_1$\
-    $(e_3, e_1) = 0, quad (e_3, e_2) = 0$\
+    #columns(2)[
+      2. $e_2 = a_2 - alpha_2 e+1, quad (e_1, e_2) = 0$\
+        $(a_2 + alpha_21 e_1, e_1) = 0,$\
+        $(a_2, e_1) + alpha_21 (e_1, e_1) = 0,$\
+
+        $alpha_21 = display(-((a_2,e_1))/((e_1,e_1)) = - ((a_2, e_1))/(dabs(e_1)^2))$\
+      
+      $e_3 = a_3 + alpha_32 e_2 + alpha_31 e_1$\
+      $(e_3, e_1) = 0, quad (e_3, e_2) = 0$\
+      #colbreak()
+      #image("images\image.png", width: 60%)
+    ]
+
+    
 
     $(e_3, e_1) = (a_3 + alpha_32 e_2 + alpha_31 e_1, e_1) = (a_3, e_1) + alpha_32 (e_2, e_1) + alpha_31 (e_1, e_1) = (a_3, e_1) + alpha_31 (e_1, e_1) = 0$\
 
@@ -251,7 +260,7 @@ $ display(G_S=mat(
 
 2. $A = Q R, R$ - матрица проекций, получавшихся в процессе ортогонализации (верхнетреугольная)\
 $R = Q^(-1) A, quad Q^T = Q^(-1) quad R = Q^T A$\
-*тут тоже график вставлю* 
+#image("images\image-1.png", width: 30%)
 
 #topicbreak(0)
 
@@ -272,7 +281,7 @@ $x perp$ подпространству $cal(E)^n$\
 #theorem_block(
   [Теорема (свойства ортогонального дополнения)],
   [
-    1. $L^perp$ является подпространство $cal(E)^n$ (проверьте сами, она так сказала)
+    1. $L^perp$ является подпространство $cal(E)^n$
     2. $cal(E) = L xor L^perp wide$ (прямая сумма)
     3. $dim cal(E) = dim L + dim L^perp$
   ],

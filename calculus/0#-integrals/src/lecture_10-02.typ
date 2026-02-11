@@ -5,11 +5,13 @@
 
 
 // макросы
-#let dabs(x) = $abs(abs(#x))$
+#let dabs(expression) = $abs(abs(#expression))$
 
-#let sumtb(x, top, bottom) = $display(sum^(#top)_(#bottom) #x)$
+#let sumtb(expression, sum_top, sum_bottom) = $display(sum^(#sum_top)_(#sum_bottom) #expression)$
 
-#let exprtb(func, x, top, bottom) = $display(#func^(#top)_(#bottom) #x)$
+#let exprtb(symbol, expression, symbol_top, symbol_bottom) = $display(#symbol^(#symbol_top)_(#symbol_bottom) #expression)$
+
+#let fullintegral(expression) = $display(integral #expression)$
 
 #let titleless_block(body) = [
   #rect(
@@ -242,13 +244,56 @@ $display(integral (dif x)/(x^2 + x^4)) = display(integral ((1 + x^2) - x^2)/(x^2
 #title_block(
   [#numbering("I", 3) тип: возвратные интегралы],
   [
-    Это тип неопределенных интегралов, которые после применения метода интегрирования по частям возвращаются к своему первоначальному виду, образуя уравнение. Они решаются путем переноса интеграла в левую часть и деления на коэффициент.\
+    Это интегралы, которые после применения метода интегрирования по частям (включая несколько применений) приводят интеграл в изначальный вид.\
+
+    Решается как ращ приведением к изначальному интегралу, переброске его (с каким то коеффициэнтом) в левую часть, что дает нам значение искомого интеграла с коеффициэнтом (его просто перебрасываем в правую часть).\
+
     Часто применяется для функций вида:\
     $integral e^(k x) sin (m x) dif x$\
+  ]
+)
+*Пример:*\
+#set math.mat(delim: "[")
+$display(integral e^(2 x) dot sin (3 x) dif x = mat(u = e^(2 x); dif u = 2 e^(2 x) dif x; dif v = sin (3 x) dif x; v = - (cos (3 x))/3) = -1/3 e^(2 x) cos (3 x) - integral -(cos (3 x))/3 dot 2 e^(2 x) dif x =)$\
+$display(= -1/3 e^(2 x) cos (3 x) + 2/3 integral e^(2 x) cos (3 x) dif x = mat(u = e ^ (2 x); dif u = 2 e^(2 x) dif x; dif v = cos (3 x) dif x; v = 1/3 sin (3 x);) = 2/9 e^(2 x) sin (3 x) -1/3 e^(2 x) cos (3 x)  -4/9 integral e^(2 x) sin (3 x) dif x) = $\
+$display(= 13/9 integral e^(2 x) sin (3 x) dif x = -9/39 e^(2 x) cos (3 x) + 18/(13 dot 9) e^2 sin (3 x) +C)$\
 
-    Чуть позже распишу пример, пока я сам не совсем понял
+Мы избавились от интеграла, то есть нашли значение исходного интеграла\
+
+
+#topicbreak(1)
+
+#align(center)[== Таблица интегралов]
+\
+#titleless_block(
+  [
+  #columns(2)[
+    1. $fullintegral(x^n dif x) = display((x^(n+1))/(n+1) + C), quad n eq.not -1$ 
+
+    2. $fullintegral(a^x dif x) = display(a^x/(ln a) + C)$
+    3. $fullintegral(e^x dif x) = e^x + C$
+    4. $fullintegral(sin x dif x) = - cos x + C$
+    5. $fullintegral(cos x dif x) = sin x + C$
+    6. $fullintegral((dif x)/(cos^2 x)) = tg x + C$
+    7. $fullintegral((dif x)/(sin^2 x)) = -ctg x + C$
+    8. $fullintegral((dif x)/(sqrt(1 - x^2))) = arcsin x + C$
+    9. $fullintegral((dif x)/(1 + x^2)) = arctan x + C$
+    10. $fullintegral(sinh x dif x) = cosh x + C$
+    11. $fullintegral(cosh x dif x) = sinh x + C$
+    #colbreak()
+    12. $fullintegral((dif x)/(sin^2 x)) = -coth x + C$
+
+    13. $fullintegral((dif x)/(cosh^2 x)) = tanh x + C$
+    14. $fullintegral((dif x)/x) = ln abs(x) + C$
+    15. $fullintegral(tan x dif x) = -ln abs(cos x) + C$
+    16. $fullintegral(ctg dif x) = ln abs(sin x) + C$
+    17. $fullintegral((x dif x)/(x^2 plus.minus a^2)) = display(1/3 ln abs(x^2 plus.minus a^2)) + C$
+    18. $fullintegral((x dif x)/(sqrt(a^2 plus.minus x^2))) = display(plus.minus sqrt(a^2 plus.minus x^2)) + C$
+    19. $fullintegral((dif x)/(x^2 - a^2)) = display(1/(2a) ln abs((x-a)/(x+a))) + C$\
+    $quad$"высокий" логарифм $ arrow.t.curve$\
+
+    20. $fullintegral((dif x)/(sqrt(x^2 plus.minus a^2))) = display(ln abs(x + sqrt(x^2 plus.minus a^2))) + C$
+  ]
   ]
 )
 
-
-Скоро здесь появится табличка интегралов с лекции
